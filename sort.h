@@ -3,4 +3,4 @@
 
 bool less(int a, int b);
 void exch(int * tab,int i,int j);
-void selection(int * table,int N);
+void selection(int * table,int N, int plot);

@@ -3,7 +3,7 @@ CC = gcc
 all: sort.o misc.o main_sort.o
 	$(CC) sort.o misc.o main_sort.o -o sort.out
 
-sort.o: sort.c sort.h
+sort.o: sort.c sort.h misc.h
 	$(CC) sort.c -c -o sort.o   
 
 misc.o: misc.c misc.h
