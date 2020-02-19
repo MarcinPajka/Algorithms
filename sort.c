@@ -110,28 +110,48 @@ static void quick__sort(int * table, int lo, int hi)
   quick__sort(table,j+1,hi);
 
 }
-static void quick_3way__sort(int * table, int lo, int hi)
+static void quick_3way__sort(int * table, int l, int r)
 {
-  if(hi <= lo )
+  int i = l -1;
+  int j = r;
+  int p = l - 1;
+  int q = r;
+  int v = table[r];
+  
+  if(r <= l )
     return;  
-  int lt = lo;
-  int i = lo + 1;
-  int gt = hi;
-  int v = table[lo];
+ 
+  for(;;)
+  { 
+    while(table[++i] < v);
+    while( v < table[--j])
+      if( j == 1)
+        break; 
+    if (i >= j)
+      break; 
+    exch(table,i,j);
+    if( table[i] == v)
+    {
+      p++;
+      exch(table,p,i);
+    }
+    if( table[j] == v)
+    {
+      q--;
+      exch(table,j,q);
+    }    
 
-  while( i <= gt)
-  {
-   
-    if ( table[i] > v )
-      exch(table, i, gt--);
-    else if(table[i] < v )
-      exch(table,lt++,i++);
-    else 
-      i++;
-  }  
+  }
+  exch(table,i,r);
+  j = i - 1;
+  i = i + 1;
+  for(int k = l; k < p; k++, j--)
+    exch(table,k,j);
+  for(int k = r-1; k > q; k--, i++)
+    exch(table,i,k);
 
-  quick_3way__sort(table,lo,lt-1);
-  quick_3way__sort(table,gt+1,hi);
+  quick_3way__sort(table,l,j);
+  quick_3way__sort(table,i,r);
 
 }
 
