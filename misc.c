@@ -6,7 +6,7 @@ void fill_table(int * table, int N)
   
   for(int i = 0; i < N; i++)
   {
-    table[i] = rand() % 501;
+    table[i] = rand() % 10000;
   }
 }
 
@@ -25,25 +25,28 @@ void free_tables(int **table, int N)
     free(table[i]);
 }
 
-void gnuplot_save_table_data(int *table, int N, int i)
+void gnuplot_save_table_data(int **table,int * sizes, int N, int sorts)
 {
-  FILE * gnuplot_pipe = popen("gnuplot ","w");
-  fprintf(gnuplot_pipe, "set terminal png size 400,300; set output 'tmp_charts/file_%d.png' ;plot '-' w boxes \n",i);
+  FILE * file = fopen("sort_times.data","w");
+
   for(int i = 0; i < N; i++)
   {
-    fprintf(gnuplot_pipe,"%d %d\n",i , table[i]);
+    fprintf(file,"%d ",sizes[i]);
+    for(int j = 0; j < sorts; j++)
+      fprintf(file,"%d ", table[j][i]);
+   fprintf(file,"\n"); 
   }
-  fprintf(gnuplot_pipe, "e\n");
+  fclose(file);
 }
-void gnuplot_plot_table_data(int *table, int N)
+void gnuplot_plot_table_data(int number_of_sorts,char ** titles)
 {
   FILE * gnuplot_pipe = popen("gnuplot -persistent","w");
-  fprintf(gnuplot_pipe, "plot '-' w boxes \n");
-  for(int i = 0; i < N; i++)
+  fprintf(gnuplot_pipe, "set style line 5  ;plot");  
+  for(int sort = 0; sort < number_of_sorts; sort++)
   {
-    fprintf(gnuplot_pipe,"%d %d\n",i , table[i]);
+    fprintf(gnuplot_pipe, " 'sort_times.data' using 1:%d w linespoints  title '%s' , ",sort+2,titles[sort]);
   }
-  fprintf(gnuplot_pipe, "e\n");
+  fprintf(gnuplot_pipe, "\n");  
 }
 
 void gnuplot_create_animation(char * directory, int N)
