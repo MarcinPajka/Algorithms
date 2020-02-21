@@ -47,12 +47,13 @@ void sink(int * pq, int * N, int key)
   }  
 }
 
-void delMax(int *pq, int * N)
+int delMax(int *pq, int * N)
 {
   int max = pq[1];
   exch(pq,1,*N);
   (*N)--;
-  pq[(*N) + 1];
+  pq[(*N) + 1]= 0;
   sink(pq, N, 1);
+  return max;
 }
 

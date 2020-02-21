@@ -56,7 +56,7 @@ void shell(int * table, int N)
 
 }
 
-void static merge_sort__merge(int * table, int lo,int mid, int hi)
+void merge_sort__merge(int * table, int lo,int mid, int hi)
 {
   int i = lo;
   int j = mid+1;
@@ -77,7 +77,7 @@ void static merge_sort__merge(int * table, int lo,int mid, int hi)
   }
 }
 
-void static merge_sort__sort(int * table, int lo, int hi)
+void merge_sort__sort(int * table, int lo, int hi)
 {
   if(hi <= lo)
     return;
@@ -100,7 +100,7 @@ void merge_sort_BU(int * table, int N)
   } 
 }
 
-static void quick__sort(int * table, int lo, int hi)
+void quick__sort(int * table, int lo, int hi)
 {
   if(hi <= lo )
     return;  
@@ -111,7 +111,7 @@ static void quick__sort(int * table, int lo, int hi)
   quick__sort(table,j+1,hi);
 
 }
-static void quick_3way__sort(int * table, int lo, int hi)
+void quick_3way__sort(int * table, int lo, int hi)
 {
   if(hi <= lo )
     return;  
@@ -136,7 +136,7 @@ static void quick_3way__sort(int * table, int lo, int hi)
 
 }
 
-static int quick__partition(int * table,int lo, int hi)
+int quick__partition(int * table,int lo, int hi)
 {
   int i = lo;
   int j = hi + 1;
@@ -168,8 +168,7 @@ void is_sorted(int * table, int N)
     {
       printf("\nTable not sorted\n");
       return;
-    }
-    
+    }  
   }
   printf("\nTable sorted\n");
 }
