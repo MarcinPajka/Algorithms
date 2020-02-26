@@ -1,41 +1,14 @@
 #include "sort.h"
-#include "misc.h"
 
-
-int main(void)
+int main()
 { 
-  int N = 28; 
-  int * table[N];
-  //int sizes[] =   {128,500,1000,1500,2000,2500,3000,3500,4000,4500,5000,6000,7000,8000,9000,10000,11000,12000,13000,14000,15000,16000};
-  int sizes[] =   {128,256,512,1024,2048,4096,8188,9000,10000,14000,18000,20000,30000,40000,50000,60000,70000,80000,100000,130000,150000,170000,180000,200000,230000,250000,280000,300000};
-  generate_and_fill_tables(table,sizes,N);
+
+  vector<long> sizes{10,100,1000,10000,100000};
+  Sort<double> sort;
+  vector<chrono::duration<double>> time(sizes.size());
+
  
-  int number_of_sorts = 5;
- // char * sort_types[] = {"Selection","Insertion","Shell","Merge","Merge_BU"};
- char * sort_types[] = {"Merge","Merge_BU","Quick","Quick_3way","PQ"};
-
-
-  int * times[number_of_sorts];
-
-  for(int i = 0; i < number_of_sorts; i++)
-    times[i] = (int *)malloc( sizeof(int) * N );
- 
-  for(int sort_type = 0; sort_type < number_of_sorts; sort_type++)
-  {
-    for(int i = 0 ; i < N ; i++)
-    { 
-      times[sort_type][i] = sort(table[i],sizes[i],sort_types[sort_type]);
-      printf(" %s sort, data size: %-7d cycles:  %d \n",sort_types[sort_type],sizes[i], times[sort_type][i]);
-    }
-    free_tables(table, N); 
-    generate_and_fill_tables(table,sizes,N);
-  }
-
-  gnuplot_save_table_data(times,sizes,N, number_of_sorts);
-  gnuplot_plot_table_data(number_of_sorts, sort_types);
-
-  free_tables(table, N);
-  free_tables(times,number_of_sorts);
+  sort.selection(1);
 
   return 0;
 }
