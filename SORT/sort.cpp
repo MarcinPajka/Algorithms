@@ -14,16 +14,16 @@ void Sort<T>::is_sorted(void)
 {    
   bool sorted = is_sorted(begin(v),end(v)); 
   if (sorted) 
-    cout<<endl<<" Data sorted "<<endl;
+    std::cout<<std::endl<<" Data sorted "<<std::endl;
   else
-    cout<<endl<<" Data not sorted "<<endl;
+    std::cout<<std::endl<<" Data not sorted "<<std::endl;
   
 
   return sorted;   
 }
 
 template<class T>
-void Sort<T>::exch(vector<T> tab,long int i,long int j)
+void Sort<T>::exch(std::vector<T> tab,long int i,long int j)
 { 
   int tmp_val = tab.at(i);
   tab.at(i) = tab.at(j);
@@ -33,64 +33,49 @@ void Sort<T>::exch(vector<T> tab,long int i,long int j)
 template<class T>
 void Sort<T>::randomize_data(void)
 {
-  for_each(v.begin(), v.end(), [](int &val){ val = rand() % MAX_VAL;} );
+  srand(std::time(NULL));
+  std::for_each(v.begin(), v.end(), [](int &val){ val = rand() % MAX_VAL;} );
 }
 
 template<class T>
-void Sort<T>::resize(long int  N)
+void Sort<T>::resize(unsigned int  N)
 {
   if ( N != v.size())
     v.resize(N);
 }
 
 template<class T>
-int Sort<T>::selection(long int N)
+void Sort<T>::selection()
 {
-  resize(N);
   randomize_data();
 
-  cout<<endl<<"SELECTION sort"<<endl;
-  chrono::time_point<chrono::system_clock> start, end;
-  start = chrono::system_clock::now();  
-
-  for (int i = 0; i < v.size(); i++)
+  for (unsigned int i = 0; i < v.size(); i++)
   {
     T min = i;
-    for (int j = i; j < v.size(); j++)
+    for (unsigned int j = i; j < v.size(); j++)
     {
       if (less(v.at(j), v.at(min)))
         min = j;
     }
     exch(v, i, min); 
   }
-
-  end = chrono::system_clock::now();   
-  chrono::duration<double> seconds = end - start; 
-  cout<<"Time: "<< seconds.count() <<endl;
-
-  return seconds;
 }
 
 template<class T>
-chrono::duration<double> Sort<T>::insertion(long int N)
+void Sort<T>::insertion()
 {
-  resize(N);
-  randomize_data();
 
-  cout<<endl<<"INSERTION sort, table size: "<<v.size()<<endl;
-  chrono::time_point<chrono::system_clock> start, end;
-  start = chrono::system_clock::now();   
- 
-  for (int i = 1; i < v.size(); i++)
+  randomize_data();
+  for (unsigned int i = 1; i < v.size(); i++)
   {
     for (int j = i; j > 0 && less(v.at(j), v.at(j-1)) ;j--)
       exch(v, j, j-1);       
   }
-  end = chrono::system_clock::now();   
-  chrono::duration<double> seconds = end - start; 
-  cout<<"Time: "<< seconds.count() <<endl;
-
-  return seconds;
 }
 
+template<typename T>
+Sort<T>::Sort()
+{
+  std::cout<<"Constructor";
+}
 

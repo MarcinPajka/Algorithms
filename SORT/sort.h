@@ -2,22 +2,25 @@
 #include<cstdlib>
 #include<iostream>
 #include<chrono>
+#include<algorithm>
+#include<map>
 
-#define MAX_VAL 100
+#define MAX_VAL 100000
 #define MIN(a,b) ( ((a) > (b)) ? b : a )
-using namespace std;
 
-template<class T>
+template<typename T>
 class Sort
 {
-  vector<T> v; 
+  std::vector<T> v; 
   bool less(T a, T b);
   void is_sorted(void);
-  void exch(vector<T> tab,long  int i,long int j);
+  void exch(std::vector<T> tab,long  int i,long int j);
   void randomize_data(void);
-  void resize(long int N);
+
   public:
-  int selection(long int N);
-  chrono::duration<double> insertion(long int N);
+  void resize(unsigned int N);
+  void selection();
+  void insertion();
+  Sort();
 
 };
