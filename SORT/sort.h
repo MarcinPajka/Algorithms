@@ -5,7 +5,7 @@
 #include<algorithm>
 #include<iomanip>
 
-#define MAX_VAL 25
+#define MAX_VAL 250
 #define MIN(a,b) ( ((a) > (b)) ? b : a )
 
 template<typename T>

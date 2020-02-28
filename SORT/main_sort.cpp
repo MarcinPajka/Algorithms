@@ -1,7 +1,7 @@
 #include "sort_template.h"
-#define SORTS 8
+#define SORTS 9
 
-std::string titles[]{"SELECTION","INSERTION","SHELL","MERGE","MERGE_BU","QUICKSORT","QUICKSORT WITH INSERT","QUICKSORT 3WAY"};
+std::string titles[]{"SELECTION","INSERTION","SHELL","MERGE","MERGE_BU","QUICKSORT","QUICKSORT WITH INSERT","QUICKSORT 3WAY","QUEUE"};
 void plot(void);
 void print_data(std::string s, double val );
 
@@ -11,6 +11,7 @@ int main()
   std::vector<long> sizes_2{10,100,500,1000,5000,7500,10000,12500,15000,17500,20000,22500,25000,27500,30000,32500,35000,37500,40000,42500,45000,
 47500,50000,52500,55000,57500,60000};
   Sort<int> sort;
+  Queue<int> queue;
   std::vector< std::vector<double> > time(SORTS);
   std::chrono::duration<double> seconds; 
   
@@ -94,8 +95,20 @@ for (unsigned int i = 0; i < sizes_2.size(); i++)
     end = std::chrono::system_clock::now();   
    
     seconds = end - start; 
-    print_data("QUICKSORT 3WAY: ",seconds.count());
+    print_data("QUICKSORT 3WAY SORT Time: ",seconds.count());
     time.at(7).push_back(seconds.count()); 
+
+
+    queue.set_data(sizes_2.at(i));
+    start = std::chrono::system_clock::now();    
+
+    queue.sort();  
+    end = std::chrono::system_clock::now();   
+   
+    seconds = end - start; 
+    print_data("QUEUE SORT Time: ",seconds.count());
+    time.at(8).push_back(seconds.count()); 
+
   } 
 
   FILE * file = fopen("sort_times.data","w");

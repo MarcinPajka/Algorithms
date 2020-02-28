@@ -109,7 +109,6 @@ int Sort<T>::quicksort_with_insert__partition(unsigned int lo,unsigned int hi)
 template<typename T>
 void Sort<T>::quicksort_sort(unsigned int lo, unsigned int hi)
 {
-
   if (hi <= lo)
     return;
   unsigned int j = quick__partition(lo,hi);
@@ -159,7 +158,6 @@ void Sort<T>::quicksort_3way_sort(int lo ,int hi)
       i++;
     }
   }
-
   quicksort_3way_sort(lo,lt-1);
   quicksort_3way_sort(gt+1,hi);
 }

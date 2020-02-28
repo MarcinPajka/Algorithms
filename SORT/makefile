@@ -6,7 +6,11 @@ all: main_sort.o sort.o
 sort.o: sort.cpp sort.h
 	$(CC) sort.cpp -c -o sort.o   
 
-main_sort.o: sort.h 
+queue.o: queue.cpp queue.h 
+	$(CC) queue.cpp -c -o queue.o   
+
+
+main_sort.o: sort_template.h 
 	$(CC) main_sort.cpp -c -o main_sort.o
 
 clean:
