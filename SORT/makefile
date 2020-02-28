@@ -1,4 +1,4 @@
-CC = g++ -O -std=c++11 -Wpedantic -Wall -Wextra -I/usr/include/python2.7 -lpython2.7
+CC = g++ -O -std=c++14 -Wpedantic -Wall -Wextra
 all: main_sort.o sort.o
 	$(CC) main_sort.o  -o sort.out
 	rm -f *.o
@@ -6,7 +6,7 @@ all: main_sort.o sort.o
 sort.o: sort.cpp sort.h
 	$(CC) sort.cpp -c -o sort.o   
 
-main_sort.o: sort.h matplotlibcpp.h
+main_sort.o: sort.h 
 	$(CC) main_sort.cpp -c -o main_sort.o
 
 clean:
